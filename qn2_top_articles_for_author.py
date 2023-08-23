@@ -3,13 +3,16 @@
 # If articles have the same number of comments, order them by name asc
 
 import requests
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def topArticles(username, limit):
-    response = requests.get(
-        f'https://jsonmock.hackerrank.com/api/articles?author={username}&limit={limit}')
+    try:
+        response = requests.get(
+            f'https://jsonmock.hackerrank.com/api/articles?author={username}&limit={limit}')
 
-    if response.status_code == 200:
         data = response.json()
 
         articles_data = data['data']
@@ -19,12 +22,14 @@ def topArticles(username, limit):
 
         article_names = [item['title'] for item in sorted_articles]
         return article_names
-    else:
-        print("Error Occured: ", response.status_code)
+
+    # Refactor: Modify to handle specific exceptions
+    except Exception as err:
+        logger.error(f'An error occured lloger: {err}')
 
 
 if __name__ == "__main__":
     username = "epaga"
     limit = 5
 
-    print('article names: ', topArticles(username, limit))
+    print('Output: ', topArticles(username, limit))
