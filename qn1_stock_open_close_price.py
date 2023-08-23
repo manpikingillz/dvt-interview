@@ -49,6 +49,15 @@ import datetime
 import requests
 
 
+'''
+Note: This is too naive, and given more time, it can be refactored to add
+- Calling the requests asynchronously
+- Factoring in the fact that data returned maybe quite alot
+- proper error handling using relevant exception classes
+- catering for edge cases
+'''
+
+
 def openAndClosePrices(firstDate, lastDate):
     first_date = datetime.datetime.strptime(firstDate, '%d-%B-%Y')
     last_date = datetime.datetime.strptime(lastDate, '%d-%B-%Y')
