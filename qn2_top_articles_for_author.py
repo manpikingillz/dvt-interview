@@ -17,9 +17,7 @@ def topArticles(username, limit):
             articles_data,
             key=lambda article: (-article['num_comments'], article['title']))
 
-        article_names = []
-        for item in sorted_articles:
-            article_names.append(item['title'])
+        article_names = [item['title'] for item in sorted_articles]
         return article_names
     else:
         print("Error Occured: ", response.status_code)
